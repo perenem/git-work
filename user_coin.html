@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+<div class="content1" layout:fragment="content">
+    <form th:action="@{/user/userInsertCoin}" method="post" class="container">
+        <table>
+            <tr>
+                <th>회원 ID</th>
+                <th>회원 성함</th>
+                <th>남은 잔액</th>
+            </tr>
+            <tr th:each="dto : ${usersDto}" th:object="${dto}">
+                <td th:text="*{userId}">ID</td>
+                <td th:text="*{name}">이름</td>
+                <td th:text="*{money}">잔액</td>
+            </tr>
+        </table>
+        <h2><label><input type="radio" name="money" value="1000">1000원</label></h2>
+        <h2><label><input type="radio" name="money" value="2000">2000원</label></h2>
+        <h2><label><input type="radio" name="money" value="3000">3000원</label></h2>
+        <h2><label><input type="radio" name="money" value="5000">5000원</label></h2>
+        <h2><label><input type="radio" name="money" value="10000">10000원</label></h2>
+        <h2><label><input type="radio" name="money" value="20000">20000원</label></h2>
+        <br>
+        <input type="submit" value="저장" class="btn btn-primary">
+        <a href="/">뒤로가기</a>
+    </form>
+</div>
+</body>
+</html>
