@@ -65,10 +65,12 @@ public class PcController {
         return "user/user_coin";
     }
 
-    @PostMapping("/user/userInsertCoin")
-    public String userChargedCoin(@RequestParam("money") int money,
-                                  @PathVariable("userId") String userId) {
-        userService.chargedCoin(money, userId);
-        return "redirect:/user/userInsertCoin";
+@PostMapping("/user/userInsertCoin")
+    public ModelAndView userChargedCoin(@RequestParam("money") int money,
+                                        @RequestParam("userNo") Long userNo) {
+        userService.chargedCoin(userNo, money);
+        ModelAndView modelAndView = new ModelAndView("charging");
+        modelAndView.addObject(money);
+        return modelAndView;
     }
 }
