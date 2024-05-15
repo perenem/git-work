@@ -68,32 +68,44 @@ public class UserService {
     } // 주문 들어온 메뉴들 db에 저장
 
 
-public void chargedCoin(int money, String userId) {
-    Users users = usersRepository.findById(userId).orElseThrow(() -> new RuntimeException("사용자가 없습니다"));
-    int currentMoney = users.getMoney();
+//    public void chargedCoin(int money, String userId) {
+//        Users users = (Users) usersRepository.findById().orElseThrow(() -> new RuntimeException("null"));
+//        int currentMoney = users.getMoney();
+//
+//        switch (money) {
+//            case 1:
+//                currentMoney += 1000;
+//                break;
+//            case 2:
+//                currentMoney += 2000;
+//                break;
+//            case 3:
+//                currentMoney += 3000;
+//                break;
+//            case 4:
+//                currentMoney += 5000;
+//                break;
+//            case 5:
+//                currentMoney += 10000;
+//                break;
+//            case 6:
+//                currentMoney += 20000;
+//                break;
+//        }
+//        currentMoney = currentMoney+money;
+//        users.setMoney(currentMoney);
+//        usersRepository.save(users);
+//    }
 
-    switch (money) {
-        case 1:
-            currentMoney += 1000;
-            break;
-        case 2:
-            currentMoney += 2000;
-            break;
-        case 3:
-            currentMoney += 3000;
-            break;
-        case 4:
-            currentMoney += 5000;
-            break;
-        case 5:
-            currentMoney += 10000;
-            break;
-        case 6:
-            currentMoney += 20000;
-            break;
-    }
-    currentMoney = currentMoney+money;
-    users.setMoney(currentMoney);
-    usersRepository.save(users);
+
+public void chargedCoin(Long userNo, int money){
+        Users users = usersRepository.findByUserNo(userNo);
+        if (users != null){
+            int currentMoney = users.getMoney();
+            users.setMoney(currentMoney + money);
+            usersRepository.save(users);
+        } else{
+            System.out.printf("사용자가 없습니다.");
+        }
     }
 }
