@@ -1,36 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/default_layout}">
+<html xmlns:th="www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/user_login_css.css}">
+    <title>Quokka's Login</title>
+    <script th:src="@{/js/loginRegister.js}" th:inline="javascript"></script>
 </head>
-<body >
+<body>
 <div class="content1" layout:fragment="content">
     <form th:action="@{/user/userInsertCoin}" method="post" class="container">
-        <table>
-            <tr>
-                <th>회원 ID</th>
-                <th>회원 성함</th>
-                <th>남은 잔액</th>
-            </tr>
-            <tr th:each="dto : ${usersDto}" th:object="${dto}">
-                <td th:text="*{userId}">ID</td>
-                <td th:text="*{name}">이름</td>
-                <td th:text="*{money}">잔액</td>
-            </tr>
-        </table>
-        <h2><label><input type="radio" name="money" value="1000">1000원</label></h2>
-        <h2><label><input type="radio" name="money" value="2000">2000원</label></h2>
-        <h2><label><input type="radio" name="money" value="3000">3000원</label></h2>
-        <h2><label><input type="radio" name="money" value="5000">5000원</label></h2>
-        <h2><label><input type="radio" name="money" value="10000">10000원</label></h2>
-        <h2><label><input type="radio" name="money" value="20000">20000원</label></h2>
-        <br>
-        <input type="submit" value="저장" class="btn btn-primary">
-        <a href="/">뒤로가기</a>
+        <div th:each="userDto : ${usersDto}">
+            <h2><p>사용자 잔액: <span th:text="${userDto.money}"></span></p></h2>
+
+            <div>
+                <div> 충전 </div>
+                <div class="form-check">
+                    <input type="radio" id="money" name="amount" value="1" class="form-check-input">
+                    <label class="form-check-label">1000원</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="money" name="amount" value="2" class="form-check-input">
+                    <label class="form-check-label">2000원</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="money" name="amount" value="3" class="form-check-input">
+                    <label class="form-check-label">3000원</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="money" name="amount" value="4" class="form-check-input">
+                    <label class="form-check-label">5000원</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="money" name="amount" value="5" class="form-check-input">
+                    <label class="form-check-label">10000원</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="money" name="amount" value="6" class="form-check-input">
+                    <label class="form-check-label">20000원</label>
+                </div>
+            </div>
+
+            <input type="hidden" name="userNo" th:value="${userDto.userNo}">
+            <input type="submit" value="Save" class="btn btn-primary">
+            <br>
+            <a href="/">Go back</a>
+        </div>
     </form>
 </div>
+
 </body>
 </html>
